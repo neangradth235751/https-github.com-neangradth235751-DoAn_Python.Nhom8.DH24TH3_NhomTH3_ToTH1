@@ -8,7 +8,7 @@ def connect_db():
         host="localhost",
         user="root",
         password="",
-        database="cuahang_xaydung"
+        database="qlvatlieu"
     )
 
 # Căn giữa cửa sổ
@@ -21,25 +21,27 @@ def center_window(win, w=500, h=400):
 
 # Cửa sổ chính
 root = tk.Tk()
-root.title("Quản lý Vật liệu")
-center_window(root)
-root.resizable(False, False)
+root.title("Quản lý cửa hàng vật liệu xây dựng")
+root.geometry("750x750")
+
+# Tiêu đề
+tk.Label(root, text="PHẦN MỀM QUẢN LÝ CỬA HÀNG VẬT LIỆU XÂY DỰNG", font=("Arial", 18, "bold")).pack(pady=10)
 
 tk.Label(root, text="QUẢN LÝ VẬT LIỆU", font=("Arial", 16, "bold")).pack(pady=10)
 
-# Frame nhập liệu
+# Frame thông tin nhập liệu
 frame_input = tk.Frame(root)
-frame_input.pack(pady=5)
+frame_input.pack(pady=5, padx=10, fill="x")
 
 tk.Label(frame_input, text="Mã VL").grid(row=0, column=0, padx=5, pady=5)
-entry_mavl = tk.Entry(frame_input, width=20)
-entry_mavl.grid(row=0, column=1, padx=5)
+entry_mavl = tk.Entry(frame_input, width=15)
+entry_mavl.grid(row=0, column=1)
 
-tk.Label(frame_input, text="Tên VL").grid(row=1, column=0, padx=5, pady=5)
-entry_tenvl = tk.Entry(frame_input, width=30)
-entry_tenvl.grid(row=1, column=1, padx=5)
+tk.Label(frame_input, text="Tên VL").grid(row=0, column=2, padx=5, pady=5)
+entry_tenvl = tk.Entry(frame_input, width=25)
+entry_tenvl.grid(row=0, column=3)
 
-# Bảng dữ liệu
+# Bảng danh sách vật liệu
 columns = ("mavl", "tenvl")
 tree = ttk.Treeview(root, columns=columns, show="headings", height=8)
 tree.heading("mavl", text="Mã VL")
