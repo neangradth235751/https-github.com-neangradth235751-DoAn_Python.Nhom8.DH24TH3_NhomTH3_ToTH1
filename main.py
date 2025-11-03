@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import mysql.connector
-
+from PIL import Image, ImageTk
 # Kết nối CSDL
 def connect_db():
     return mysql.connector.connect(
@@ -10,6 +10,36 @@ def connect_db():
         password="123456789",
         database="qlvatlieu"
     )
+
+# GIAO DIỆN CHÍNH CÓ NỀN HÌNH SAO
+# -----------------------------------
+
+root = tk.Tk()
+root.title("Giao diện có nền hình sao ✨")
+root.geometry("600x500")
+root.resizable(False, False)
+
+
+# ---- Tải ảnh nền ----
+try:
+    bg_image = Image.open("star_bg.jpg")  # thay bằng tên file ảnh bạn có
+except:
+    messagebox.showerror("Lỗi", "Không tìm thấy file star_bg.jpg!")
+    root.destroy()
+    exit()
+
+# ---- Chỉnh kích thước ảnh nền cho vừa cửa sổ ----
+bg_image = bg_image.resize((900, 600))
+bg_photo = ImageTk.PhotoImage(bg_image)
+
+# ---- Đặt ảnh nền ----
+bg_label = tk.Label(root, image=bg_photo)
+bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+# ---- Tạo lớp khung trong suốt phía trên ----
+main_frame = tk.Frame(root, bg="#000000", bd=0, highlightthickness=0)
+main_frame.place(relx=0.5, rely=0.5, anchor="center")
+
 
 # Căn giữa cửa sổ
 def center_window(win, w=500, h=400):
